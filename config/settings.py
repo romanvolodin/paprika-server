@@ -1,10 +1,15 @@
 from pathlib import Path
 
+from environs import Env
+
+
+env = Env()
+env.read_env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = 'e-bb^xr_^ez69df9p3l7&oy0-$i9_kysmp62=v)k$&yo8yalmp'
-DEBUG = True
-ALLOWED_HOSTS = []
+SECRET_KEY = env.str("SECRET_KEY", 'secret')
+DEBUG = env.bool("DEBUG", False)
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", ['localhost', '127.0.0.1'])
 
 INSTALLED_APPS = [
     'django.contrib.admin',
